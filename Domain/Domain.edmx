@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DomainTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Domain" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="DomainContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="XasidaSet" EntityType="Domain.Xasida" />
+          <EntitySet Name="BeyitSet" EntityType="Domain.Beyit" />
+          <AssociationSet Name="XasidaBeyit" Association="Domain.XasidaBeyit">
+            <End Role="Xasida" EntitySet="XasidaSet" />
+            <End Role="Beyit" EntitySet="BeyitSet" />
+          </AssociationSet>
+          <EntitySet Name="BahruSet" EntityType="Domain.Bahru" />
+          <AssociationSet Name="BeyitBahru" Association="Domain.BeyitBahru">
+            <End Role="Beyit" EntitySet="BeyitSet" />
+            <End Role="Bahru" EntitySet="BahruSet" />
+          </AssociationSet>
+          <EntitySet Name="MoleSet" EntityType="Domain.Mole" />
+          <AssociationSet Name="XasidaMole" Association="Domain.XasidaMole">
+            <End Role="Xasida" EntitySet="XasidaSet" />
+            <End Role="Mole" EntitySet="MoleSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Xasida">
+          <Key>
+            <PropertyRef Name="Titre" />
+          </Key>
+          <Property Type="Int32" Name="Titre" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Tardioumane" Nullable="false" />
+          <Property Type="String" Name="Langue" Nullable="false" />
+          <NavigationProperty Name="Beyits" Relationship="Domain.XasidaBeyit" FromRole="Xasida" ToRole="Beyit" />
+          <NavigationProperty Name="Moles" Relationship="Domain.XasidaMole" FromRole="Xasida" ToRole="Mole" />
+        </EntityType>
+        <EntityType Name="Beyit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="XasidaId" Nullable="false" />
+          <Property Type="String" Name="Position" Nullable="false" />
+          <NavigationProperty Name="Xasida" Relationship="Domain.XasidaBeyit" FromRole="Beyit" ToRole="Xasida" />
+          <Property Type="Int32" Name="XasidaTitre" Nullable="false" />
+          <NavigationProperty Name="Bahru" Relationship="Domain.BeyitBahru" FromRole="Beyit" ToRole="Bahru" />
+        </EntityType>
+        <Association Name="XasidaBeyit">
+          <End Type="Domain.Xasida" Role="Xasida" Multiplicity="1" />
+          <End Type="Domain.Beyit" Role="Beyit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Xasida">
+              <PropertyRef Name="Titre" />
+            </Principal>
+            <Dependent Role="Beyit">
+              <PropertyRef Name="XasidaTitre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bahru">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="BeyitId" Nullable="false" />
+          <Property Type="Int16" Name="Position" Nullable="false" />
+          <Property Type="String" Name="Contenu" Nullable="false" />
+          <NavigationProperty Name="Beyit" Relationship="Domain.BeyitBahru" FromRole="Bahru" ToRole="Beyit" />
+          <Property Type="Int32" Name="BeyitId1" Nullable="false" />
+        </EntityType>
+        <Association Name="BeyitBahru">
+          <End Type="Domain.Beyit" Role="Beyit" Multiplicity="1" />
+          <End Type="Domain.Bahru" Role="Bahru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beyit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bahru">
+              <PropertyRef Name="BeyitId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Mole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Titre" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="false" />
+          <NavigationProperty Name="Xasidas" Relationship="Domain.XasidaMole" FromRole="Mole" ToRole="Xasida" />
+        </EntityType>
+        <Association Name="XasidaMole">
+          <End Type="Domain.Xasida" Role="Xasida" Multiplicity="*" />
+          <End Type="Domain.Mole" Role="Mole" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Domain" />
+        <Alias Key="Target" Value="Domain.Store" />
+        <EntityContainerMapping CdmEntityContainer="DomainContainer" StorageEntityContainer="DomainTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Domain" >
+        <EntityTypeShape EntityType="Domain.Xasida" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7879850260416672" />
+        <EntityTypeShape EntityType="Domain.Beyit" Width="1.5" PointX="3.75" PointY="0.875" Height="2.1725878906249996" />
+        <AssociationConnector Association="Domain.XasidaBeyit">
+          <ConnectorPoint PointX="2.25" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="3.75" PointY="2.0189925130208337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Domain.Bahru" Width="1.5" PointX="6.75" PointY="0.875" Height="2.1725878906249996" />
+        <AssociationConnector Association="Domain.BeyitBahru">
+          <ConnectorPoint PointX="5.25" PointY="1.9612939453124998" />
+          <ConnectorPoint PointX="6.75" PointY="1.9612939453124998" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Domain.Mole" Width="1.5" PointX="3.75" PointY="4.25" Height="1.5956835937499996" />
+        <AssociationConnector Association="Domain.XasidaMole">
+          <ConnectorPoint PointX="1.5" PointY="3.1052864583333331" />
+          <ConnectorPoint PointX="1.5" PointY="5.1439925130208337" />
+          <ConnectorPoint PointX="3.75" PointY="5.1439925130208337" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
