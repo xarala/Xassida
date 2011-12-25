@@ -4,11 +4,122 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="DomainTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlServerCe.3.5" ProviderManifestToken="3.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="DomainStoreContainer">
+    <EntitySet Name="XasidaSet" EntityType="Domain.Store.XasidaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BeyitSet" EntityType="Domain.Store.BeyitSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BahruSet" EntityType="Domain.Store.BahruSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MoleSet" EntityType="Domain.Store.MoleSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="XasidaMole" EntityType="Domain.Store.XasidaMole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="XasidaBeyit" Association="Domain.Store.XasidaBeyit">
+      <End Role="Xasida" EntitySet="XasidaSet" />
+      <End Role="Beyit" EntitySet="BeyitSet" />
+    </AssociationSet>
+    <AssociationSet Name="BeyitBahru" Association="Domain.Store.BeyitBahru">
+      <End Role="Beyit" EntitySet="BeyitSet" />
+      <End Role="Bahru" EntitySet="BahruSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_XasidaMole_Xasida" Association="Domain.Store.FK_XasidaMole_Xasida">
+      <End Role="Xasida" EntitySet="XasidaSet" />
+      <End Role="XasidaMole" EntitySet="XasidaMole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_XasidaMole_Mole" Association="Domain.Store.FK_XasidaMole_Mole">
+      <End Role="Mole" EntitySet="MoleSet" />
+      <End Role="XasidaMole" EntitySet="XasidaMole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="XasidaSet">
+    <Key>
+      <PropertyRef Name="Titre" />
+    </Key>
+    <Property Name="Titre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tardioumane" Type="nvarchar" Nullable="false" />
+    <Property Name="Langue" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BeyitSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="XasidaId" Type="nvarchar" Nullable="false" />
+    <Property Name="Position" Type="nvarchar" Nullable="false" />
+    <Property Name="XasidaTitre" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BahruSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BeyitId" Type="int" Nullable="false" />
+    <Property Name="Position" Type="smallint" Nullable="false" />
+    <Property Name="Contenu" Type="nvarchar" Nullable="false" />
+    <Property Name="BeyitId1" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MoleSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Titre" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+  </EntityType>
+  <EntityType Name="XasidaMole">
+    <Key>
+      <PropertyRef Name="Xasidas_Titre" />
+      <PropertyRef Name="Moles_Id" />
+    </Key>
+    <Property Name="Xasidas_Titre" Type="int" Nullable="false" />
+    <Property Name="Moles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="XasidaBeyit">
+    <End Role="Xasida" Type="Domain.Store.XasidaSet" Multiplicity="1" />
+    <End Role="Beyit" Type="Domain.Store.BeyitSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Xasida">
+        <PropertyRef Name="Titre" />
+      </Principal>
+      <Dependent Role="Beyit">
+        <PropertyRef Name="XasidaTitre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BeyitBahru">
+    <End Role="Beyit" Type="Domain.Store.BeyitSet" Multiplicity="1" />
+    <End Role="Bahru" Type="Domain.Store.BahruSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Beyit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bahru">
+        <PropertyRef Name="BeyitId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_XasidaMole_Xasida">
+    <End Role="Xasida" Type="Domain.Store.XasidaSet" Multiplicity="1" />
+    <End Role="XasidaMole" Type="Domain.Store.XasidaMole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Xasida">
+        <PropertyRef Name="Titre" />
+      </Principal>
+      <Dependent Role="XasidaMole">
+        <PropertyRef Name="Xasidas_Titre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_XasidaMole_Mole">
+    <End Role="XasidaMole" Type="Domain.Store.XasidaMole" Multiplicity="*" />
+    <End Role="Mole" Type="Domain.Store.MoleSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Mole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="XasidaMole">
+        <PropertyRef Name="Moles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Domain" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -103,13 +214,57 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Domain" />
-        <Alias Key="Target" Value="Domain.Store" />
-        <EntityContainerMapping CdmEntityContainer="DomainContainer" StorageEntityContainer="DomainTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DomainStoreContainer" CdmEntityContainer="DomainContainer">
+    <EntitySetMapping Name="XasidaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Domain.Xasida)">
+        <MappingFragment StoreEntitySet="XasidaSet">
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Tardioumane" ColumnName="Tardioumane" />
+          <ScalarProperty Name="Langue" ColumnName="Langue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BeyitSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Domain.Beyit)">
+        <MappingFragment StoreEntitySet="BeyitSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="XasidaId" ColumnName="XasidaId" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="XasidaTitre" ColumnName="XasidaTitre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BahruSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Domain.Bahru)">
+        <MappingFragment StoreEntitySet="BahruSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BeyitId" ColumnName="BeyitId" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Contenu" ColumnName="Contenu" />
+          <ScalarProperty Name="BeyitId1" ColumnName="BeyitId1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MoleSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Domain.Mole)">
+        <MappingFragment StoreEntitySet="MoleSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titre" ColumnName="Titre" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="XasidaMole" TypeName="Domain.XasidaMole" StoreEntitySet="XasidaMole">
+      <EndProperty Name="Xasida">
+        <ScalarProperty Name="Titre" ColumnName="Xasidas_Titre" />
+      </EndProperty>
+      <EndProperty Name="Mole">
+        <ScalarProperty Name="Id" ColumnName="Moles_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
