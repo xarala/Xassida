@@ -5,7 +5,9 @@
         Title="Xassida" Height="650" Width="825" Loaded="Window_Loaded">
 
 
-    <FlowDocument x:Name="XFlowDocument" FlowDirection="RightToLeft" FontFamily="Arabic Typesetting" FontSize="25" FontStretch="Expanded">   
+    <FlowDocument x:Name="XFlowDocument" FlowDirection="RightToLeft" 
+                  FontFamily="Arabic Typesetting" FontSize="25" FontStretch="Expanded" 
+                  ColumnWidth="300" ColumnGap="20" IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True">   
         
         <Section x:Name="Description">
             <Paragraph>
