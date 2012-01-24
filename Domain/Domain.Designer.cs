@@ -19,8 +19,8 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("Domain", "XasidaBeyit", "Xasida", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.Xasida), "Beyit", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.Beyit), true)]
-[assembly: EdmRelationshipAttribute("Domain", "BeyitBahru", "Beyit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.Beyit), "Bahru", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.Bahru), true)]
 [assembly: EdmRelationshipAttribute("Domain", "XasidaMole", "Xasida", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.Xasida), "Mole", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.Mole))]
+[assembly: EdmRelationshipAttribute("Domain", "BeyitBahru", "Beyit", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Model.Beyit), "Bahru", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Model.Bahru), true)]
 
 #endregion
 
@@ -193,18 +193,16 @@ namespace Model
         /// Create a new Bahru object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="beyitId">Initial value of the BeyitId property.</param>
         /// <param name="position">Initial value of the Position property.</param>
         /// <param name="contenu">Initial value of the Contenu property.</param>
-        /// <param name="beyitId1">Initial value of the BeyitId1 property.</param>
-        public static Bahru CreateBahru(global::System.Int32 id, global::System.Int32 beyitId, global::System.Int16 position, global::System.String contenu, global::System.Int32 beyitId1)
+        /// <param name="beyitId">Initial value of the BeyitId property.</param>
+        public static Bahru CreateBahru(global::System.Int32 id, global::System.Int16 position, global::System.String contenu, global::System.Int32 beyitId)
         {
             Bahru bahru = new Bahru();
             bahru.Id = id;
-            bahru.BeyitId = beyitId;
             bahru.Position = position;
             bahru.Contenu = contenu;
-            bahru.BeyitId1 = beyitId1;
+            bahru.BeyitId = beyitId;
             return bahru;
         }
 
@@ -237,30 +235,6 @@ namespace Model
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 BeyitId
-        {
-            get
-            {
-                return _BeyitId;
-            }
-            set
-            {
-                OnBeyitIdChanging(value);
-                ReportPropertyChanging("BeyitId");
-                _BeyitId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BeyitId");
-                OnBeyitIdChanged();
-            }
-        }
-        private global::System.Int32 _BeyitId;
-        partial void OnBeyitIdChanging(global::System.Int32 value);
-        partial void OnBeyitIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -315,24 +289,24 @@ namespace Model
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 BeyitId1
+        public global::System.Int32 BeyitId
         {
             get
             {
-                return _BeyitId1;
+                return _BeyitId;
             }
             set
             {
-                OnBeyitId1Changing(value);
-                ReportPropertyChanging("BeyitId1");
-                _BeyitId1 = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("BeyitId1");
-                OnBeyitId1Changed();
+                OnBeyitIdChanging(value);
+                ReportPropertyChanging("BeyitId");
+                _BeyitId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BeyitId");
+                OnBeyitIdChanged();
             }
         }
-        private global::System.Int32 _BeyitId1;
-        partial void OnBeyitId1Changing(global::System.Int32 value);
-        partial void OnBeyitId1Changed();
+        private global::System.Int32 _BeyitId;
+        partial void OnBeyitIdChanging(global::System.Int32 value);
+        partial void OnBeyitIdChanged();
 
         #endregion
     
@@ -557,7 +531,7 @@ namespace Model
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("Domain", "BeyitBahru", "Bahru")]
-        public EntityCollection<Bahru> Bahru
+        public EntityCollection<Bahru> Bahrus
         {
             get
             {
@@ -722,13 +696,11 @@ namespace Model
         /// </summary>
         /// <param name="titre">Initial value of the Titre property.</param>
         /// <param name="tardioumane">Initial value of the Tardioumane property.</param>
-        /// <param name="langue">Initial value of the Langue property.</param>
-        public static Xasida CreateXasida(global::System.Int32 titre, global::System.String tardioumane, global::System.String langue)
+        public static Xasida CreateXasida(global::System.Int32 titre, global::System.String tardioumane)
         {
             Xasida xasida = new Xasida();
             xasida.Titre = titre;
             xasida.Tardioumane = tardioumane;
-            xasida.Langue = langue;
             return xasida;
         }
 
@@ -785,30 +757,6 @@ namespace Model
         private global::System.String _Tardioumane;
         partial void OnTardioumaneChanging(global::System.String value);
         partial void OnTardioumaneChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Langue
-        {
-            get
-            {
-                return _Langue;
-            }
-            set
-            {
-                OnLangueChanging(value);
-                ReportPropertyChanging("Langue");
-                _Langue = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Langue");
-                OnLangueChanged();
-            }
-        }
-        private global::System.String _Langue;
-        partial void OnLangueChanging(global::System.String value);
-        partial void OnLangueChanged();
 
         #endregion
     

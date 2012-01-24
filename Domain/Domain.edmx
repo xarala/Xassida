@@ -15,10 +15,6 @@
       <End Role="Xasida" EntitySet="XasidaSet" />
       <End Role="Beyit" EntitySet="BeyitSet" />
     </AssociationSet>
-    <AssociationSet Name="BeyitBahru" Association="Domain.Store.BeyitBahru">
-      <End Role="Beyit" EntitySet="BeyitSet" />
-      <End Role="Bahru" EntitySet="BahruSet" />
-    </AssociationSet>
     <AssociationSet Name="FK_XasidaMole_Xasida" Association="Domain.Store.FK_XasidaMole_Xasida">
       <End Role="Xasida" EntitySet="XasidaSet" />
       <End Role="XasidaMole" EntitySet="XasidaMole" />
@@ -26,6 +22,10 @@
     <AssociationSet Name="FK_XasidaMole_Mole" Association="Domain.Store.FK_XasidaMole_Mole">
       <End Role="Mole" EntitySet="MoleSet" />
       <End Role="XasidaMole" EntitySet="XasidaMole" />
+    </AssociationSet>
+    <AssociationSet Name="BeyitBahru" Association="Domain.Store.BeyitBahru">
+      <End Role="Beyit" EntitySet="BeyitSet" />
+      <End Role="Bahru" EntitySet="BahruSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="XasidaSet">
@@ -50,10 +50,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BeyitId" Type="int" Nullable="false" />
     <Property Name="Position" Type="smallint" Nullable="false" />
     <Property Name="Contenu" Type="nvarchar" Nullable="false" />
-    <Property Name="BeyitId1" Type="int" Nullable="false" />
+    <Property Name="BeyitId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MoleSet">
     <Key>
@@ -91,7 +90,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Bahru">
-        <PropertyRef Name="BeyitId1" />
+        <PropertyRef Name="BeyitId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -131,14 +130,14 @@
             <End Role="Beyit" EntitySet="BeyitSet" />
           </AssociationSet>
           <EntitySet Name="BahruSet" EntityType="Domain.Bahru" />
-          <AssociationSet Name="BeyitBahru" Association="Domain.BeyitBahru">
-            <End Role="Beyit" EntitySet="BeyitSet" />
-            <End Role="Bahru" EntitySet="BahruSet" />
-          </AssociationSet>
           <EntitySet Name="MoleSet" EntityType="Domain.Mole" />
           <AssociationSet Name="XasidaMole" Association="Domain.XasidaMole">
             <End Role="Xasida" EntitySet="XasidaSet" />
             <End Role="Mole" EntitySet="MoleSet" />
+          </AssociationSet>
+          <AssociationSet Name="BeyitBahru" Association="Domain.BeyitBahru">
+            <End Role="Beyit" EntitySet="BeyitSet" />
+            <End Role="Bahru" EntitySet="BahruSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Xasida">
@@ -147,7 +146,6 @@
           </Key>
           <Property Type="Int32" Name="Titre" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Tardioumane" Nullable="false" />
-          <Property Type="String" Name="Langue" Nullable="false" />
           <NavigationProperty Name="Beyits" Relationship="Domain.XasidaBeyit" FromRole="Xasida" ToRole="Beyit" />
           <NavigationProperty Name="Moles" Relationship="Domain.XasidaMole" FromRole="Xasida" ToRole="Mole" />
         </EntityType>
@@ -160,7 +158,7 @@
           <Property Type="String" Name="Position" Nullable="false" />
           <NavigationProperty Name="Xasida" Relationship="Domain.XasidaBeyit" FromRole="Beyit" ToRole="Xasida" />
           <Property Type="Int32" Name="XasidaTitre" Nullable="false" />
-          <NavigationProperty Name="Bahru" Relationship="Domain.BeyitBahru" FromRole="Beyit" ToRole="Bahru" />
+          <NavigationProperty Name="Bahrus" Relationship="Domain.BeyitBahru" FromRole="Beyit" ToRole="Bahru" />
         </EntityType>
         <Association Name="XasidaBeyit">
           <End Type="Domain.Xasida" Role="Xasida" Multiplicity="1" />
@@ -179,24 +177,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="BeyitId" Nullable="false" />
           <Property Type="Int16" Name="Position" Nullable="false" />
-          <Property Type="String" Name="Contenu" Nullable="false" />
+          <Property Type="String" Name="Contenu" Nullable="false" Unicode="true" />
           <NavigationProperty Name="Beyit" Relationship="Domain.BeyitBahru" FromRole="Bahru" ToRole="Beyit" />
-          <Property Type="Int32" Name="BeyitId1" Nullable="false" />
+          <Property Type="Int32" Name="BeyitId" Nullable="false" />
         </EntityType>
-        <Association Name="BeyitBahru">
-          <End Type="Domain.Beyit" Role="Beyit" Multiplicity="1" />
-          <End Type="Domain.Bahru" Role="Bahru" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Beyit">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bahru">
-              <PropertyRef Name="BeyitId1" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Mole">
           <Key>
             <PropertyRef Name="Id" />
@@ -210,6 +195,18 @@
           <End Type="Domain.Xasida" Role="Xasida" Multiplicity="*" />
           <End Type="Domain.Mole" Role="Mole" Multiplicity="*" />
         </Association>
+        <Association Name="BeyitBahru">
+          <End Type="Domain.Beyit" Role="Beyit" Multiplicity="1" />
+          <End Type="Domain.Bahru" Role="Bahru" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beyit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bahru">
+              <PropertyRef Name="BeyitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -221,7 +218,6 @@
         <MappingFragment StoreEntitySet="XasidaSet">
           <ScalarProperty Name="Titre" ColumnName="Titre" />
           <ScalarProperty Name="Tardioumane" ColumnName="Tardioumane" />
-          <ScalarProperty Name="Langue" ColumnName="Langue" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -239,10 +235,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Domain.Bahru)">
         <MappingFragment StoreEntitySet="BahruSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BeyitId" ColumnName="BeyitId" />
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="Contenu" ColumnName="Contenu" />
-          <ScalarProperty Name="BeyitId1" ColumnName="BeyitId1" />
+          <ScalarProperty Name="BeyitId" ColumnName="BeyitId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -282,22 +277,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Domain" >
-        <EntityTypeShape EntityType="Domain.Xasida" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7879850260416672" />
-        <EntityTypeShape EntityType="Domain.Beyit" Width="1.5" PointX="3.75" PointY="0.875" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="Domain.Xasida" Width="1.5" PointX="0.75" PointY="2.375" Height="1.7879850260416657" />
+        <EntityTypeShape EntityType="Domain.Beyit" Width="1.5" PointX="4" PointY="1" Height="2.1725878906249996" />
         <AssociationConnector Association="Domain.XasidaBeyit">
-          <ConnectorPoint PointX="2.25" PointY="2.0189925130208337" />
-          <ConnectorPoint PointX="3.75" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="2.25" PointY="2.7737939453125" />
+          <ConnectorPoint PointX="4" PointY="2.7737939453125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="Domain.Bahru" Width="1.5" PointX="6.75" PointY="0.875" Height="2.1725878906249996" />
-        <AssociationConnector Association="Domain.BeyitBahru">
-          <ConnectorPoint PointX="5.25" PointY="1.9612939453124998" />
-          <ConnectorPoint PointX="6.75" PointY="1.9612939453124998" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="Domain.Mole" Width="1.5" PointX="3.75" PointY="4.25" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="Domain.Bahru" Width="1.5" PointX="7.375" PointY="1.125" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="Domain.Mole" Width="1.5" PointX="4" PointY="4" Height="1.7879850260416674" />
         <AssociationConnector Association="Domain.XasidaMole">
-          <ConnectorPoint PointX="1.5" PointY="3.1052864583333331" />
-          <ConnectorPoint PointX="1.5" PointY="5.1439925130208337" />
-          <ConnectorPoint PointX="3.75" PointY="5.1439925130208337" />
+          <ConnectorPoint PointX="1.5" PointY="4.1629850260416656" />
+          <ConnectorPoint PointX="1.5" PointY="4.9754855260416662" />
+          <ConnectorPoint PointX="4" PointY="4.9754855260416662" />
+        </AssociationConnector>
+        <AssociationConnector Association="Domain.BeyitBahru">
+          <ConnectorPoint PointX="5.5" PointY="2.1151432291666667" />
+          <ConnectorPoint PointX="7.375" PointY="2.1151432291666667" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>

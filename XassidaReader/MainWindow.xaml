@@ -1,0 +1,17 @@
+﻿<Window x:Class="XassidaReader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    
+    <FlowDocument>
+        
+        <Section x:Name="Description">
+            <Paragraph>
+                <TextBlock x:Name="Titre" Text="{Binding Titre}" FontSize="20" />
+                <TextBlock x:Name="Tardioumane" Text="{Binding Tardioumane}"></TextBlock>
+            </Paragraph>
+        </Section>
+        
+    </FlowDocument>
+    
+</Window>

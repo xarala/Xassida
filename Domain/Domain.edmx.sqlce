@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server Compact Edition
 -- --------------------------------------------------
--- Date Created: 12/25/2011 05:53:00
--- Generated from EDMX file: C:\Users\pathe\Documents\Visual Studio 2010\Projects\Xasida\Domain\Domain.edmx
+-- Date Created: 12/25/2011 22:52:42
+-- Generated from EDMX file: C:\Users\pathe\documents\visual studio 2010\Projects\Xasida\Domain\Domain.edmx
 -- --------------------------------------------------
 
 
@@ -12,12 +12,30 @@
 -- NOTE: if the constraint does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
+    ALTER TABLE [BeyitSet] DROP CONSTRAINT [FK_XasidaBeyit];
+GO
+    ALTER TABLE [XasidaMole] DROP CONSTRAINT [FK_XasidaMole_Xasida];
+GO
+    ALTER TABLE [XasidaMole] DROP CONSTRAINT [FK_XasidaMole_Mole];
+GO
+    ALTER TABLE [BahruSet] DROP CONSTRAINT [FK_BeyitBahru];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- NOTE: if the table does not exist, an ignorable error will be reported.
 -- --------------------------------------------------
 
+    DROP TABLE [XasidaSet];
+GO
+    DROP TABLE [BeyitSet];
+GO
+    DROP TABLE [BahruSet];
+GO
+    DROP TABLE [MoleSet];
+GO
+    DROP TABLE [XasidaMole];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -43,10 +61,9 @@ GO
 -- Creating table 'BahruSet'
 CREATE TABLE [BahruSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [BeyitId] int  NOT NULL,
     [Position] smallint  NOT NULL,
     [Contenu] nvarchar(4000)  NOT NULL,
-    [BeyitId1] int  NOT NULL
+    [BeyitId] int  NOT NULL
 );
 GO
 
@@ -117,20 +134,6 @@ ON [BeyitSet]
     ([XasidaTitre]);
 GO
 
--- Creating foreign key on [BeyitId1] in table 'BahruSet'
-ALTER TABLE [BahruSet]
-ADD CONSTRAINT [FK_BeyitBahru]
-    FOREIGN KEY ([BeyitId1])
-    REFERENCES [BeyitSet]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_BeyitBahru'
-CREATE INDEX [IX_FK_BeyitBahru]
-ON [BahruSet]
-    ([BeyitId1]);
-GO
-
 -- Creating foreign key on [Xasidas_Titre] in table 'XasidaMole'
 ALTER TABLE [XasidaMole]
 ADD CONSTRAINT [FK_XasidaMole_Xasida]
@@ -152,6 +155,20 @@ ADD CONSTRAINT [FK_XasidaMole_Mole]
 CREATE INDEX [IX_FK_XasidaMole_Mole]
 ON [XasidaMole]
     ([Moles_Id]);
+GO
+
+-- Creating foreign key on [BeyitId] in table 'BahruSet'
+ALTER TABLE [BahruSet]
+ADD CONSTRAINT [FK_BeyitBahru]
+    FOREIGN KEY ([BeyitId])
+    REFERENCES [BeyitSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BeyitBahru'
+CREATE INDEX [IX_FK_BeyitBahru]
+ON [BahruSet]
+    ([BeyitId]);
 GO
 
 -- --------------------------------------------------
