@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xarala.Xassida.Api", "SnXas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XassidaReader", "XassidaReader\XassidaReader.csproj", "{515C0E3B-3106-4C9B-8358-667DECE77045}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Xassida", "Xassida\Xassida.vdproj", "{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,12 @@ Global
 		{515C0E3B-3106-4C9B-8358-667DECE77045}.Release|Mixed Platforms.Build.0 = Release|x86
 		{515C0E3B-3106-4C9B-8358-667DECE77045}.Release|x86.ActiveCfg = Release|x86
 		{515C0E3B-3106-4C9B-8358-667DECE77045}.Release|x86.Build.0 = Release|x86
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Debug|Any CPU.ActiveCfg = Debug
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Debug|x86.ActiveCfg = Debug
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Release|Any CPU.ActiveCfg = Release
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Release|Mixed Platforms.ActiveCfg = Release
+		{12C8A1FA-D2CF-483B-AB09-89EF342F63E0}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
