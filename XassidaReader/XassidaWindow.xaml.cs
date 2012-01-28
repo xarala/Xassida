@@ -69,7 +69,7 @@ namespace XassidaReader
                 Paragraph para = new Paragraph();
                 foreach (Bahru bahru in b.Bahrus)
                 {
-                    Span r = new Span(new Run(bahru.Contenu));
+                    Span r = new Span(new Run(bahru.Contenu + " "));
                     para.Inlines.Add(r);
                     para.MinOrphanLines = 1;
                     para.Margin =  new Thickness(10, 10, 10, 10);

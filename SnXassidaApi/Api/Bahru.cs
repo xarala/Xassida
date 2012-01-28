@@ -17,10 +17,7 @@ namespace Xarala
             /// <summary>
             /// Parameterless Constructor
             /// </summary>
-            public Bahru()
-            {
-
-            }
+            public Bahru() { }
 
             /// <summary>
             /// Constructor

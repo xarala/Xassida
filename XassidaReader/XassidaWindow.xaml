@@ -7,11 +7,12 @@
 
     <FlowDocument x:Name="XFlowDocument" FlowDirection="RightToLeft" 
                   FontFamily="Arabic Typesetting" FontSize="25" FontStretch="Expanded" 
-                  ColumnWidth="300" ColumnGap="20" IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True">   
+                  IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True"
+                  Style="10, 10, 10, 10">   
         
         <Section x:Name="Description">
             <Paragraph>
-                <TextBlock x:Name="Titre" Text="{Binding Titre}" FontSize="30" />
+                <TextBlock x:Name="Titre" Text="{Binding Titre}" FontSize="30" TextAlignment="Justify" FlowDirection="LeftToRight" />
                 <TextBlock x:Name="Tardioumane" Text="{Binding Tardioumane}"></TextBlock>
             </Paragraph>
         </Section>

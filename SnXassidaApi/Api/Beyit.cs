@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Xarala
 {
@@ -14,6 +16,11 @@ namespace Xarala
         /// </summary>
         public sealed class Beyit : IFormattable
         {
+
+            /// <summary>
+            /// ParameterLess Constructor
+            /// </summary>
+            public Beyit() { }
 
             /// <summary>
             /// Constructor
@@ -37,6 +44,8 @@ namespace Xarala
             /// <summary>
             /// Une liste liée contenant les bahrus du beyit
             /// </summary>
+            /// 
+            [XmlArrayAttribute]
             public List<Bahru> Bahrus { get; set; }
 
             /// <summary>

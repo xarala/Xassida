@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 
 namespace Xarala
@@ -11,15 +13,14 @@ namespace Xarala
         /// <summary>
         /// Represents a single xassida
         /// </summary>
+        /// 
+        [XmlType(TypeName="Xassida", Namespace = "http://xassida.org/xassaides")]
         public sealed class Xassida : IFormattable
         {
             /// <summary>
             /// Parameterless Constructor
             /// </summary>
-            public Xassida()
-            {
-            
-            }
+            public Xassida() { }
 
             /// <summary>
             /// Constructor
@@ -61,6 +62,8 @@ namespace Xarala
             /// <summary>
             /// Linked list containing the beyits
             /// </summary>
+            /// 
+            [XmlArrayAttribute] /// Indicates that the attribute is serialized as an xml attribute
             public List<Beyit> Beyits { get; set; }
 
             /// <summary>
