@@ -2,13 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:a="clr-namespace:Xarala.Xassida;assembly=SnXassidaApi"
-        Title="Xassida" Height="650" Width="825" Loaded="Window_Loaded">
+        Title="Xassida" Height="650" Width="720" Loaded="Window_Loaded">
 
 
     <FlowDocument x:Name="XFlowDocument" FlowDirection="RightToLeft" 
                   FontFamily="Arabic Typesetting" FontSize="25" FontStretch="Expanded" 
-                  IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True"
-                  Style="10, 10, 10, 10">   
+                  IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True">   
         
         <Section x:Name="Description">
             <Paragraph>

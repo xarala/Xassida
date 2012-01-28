@@ -60,6 +60,21 @@ namespace Xarala
             public int Nombrebahrus { get; set; }
 
             /// <summary>
+            /// Get a filename for the xassida
+            /// the tiltle + .xassida
+            /// getter only
+            /// </summary>
+            public string FileName
+            {
+                get 
+                { 
+                    return Titre + ".xassida"; 
+                }
+                
+            }
+
+
+            /// <summary>
             /// Linked list containing the beyits
             /// </summary>
             /// 

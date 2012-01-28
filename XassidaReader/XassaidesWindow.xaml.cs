@@ -17,6 +17,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using Xarala;
 using Xarala.Xassida;
+using System.Windows.Navigation;
 
 namespace XassidaReader
 {
@@ -27,8 +28,16 @@ namespace XassidaReader
     public partial class XassaidesWindow : Window
     {
 
-        
+        /// <summary>
+        /// List of Xassaides
+        /// </summary>
         public List<Xassida> ListXassiDas = new List<Xassida>();
+
+
+
+        /// get a store in isolated strorage
+        /// 
+        IsolatedStorageFile IsolatedStore = IsolatedStorageFile.GetUserStoreForDomain();
 
 
         public XassaidesWindow()
@@ -86,24 +95,38 @@ namespace XassidaReader
             /// 
             Xassida selectedXassida = (Xassida)XassaidesListBox.SelectedItem;
 
+            /// Isolated storage file
+            ///
+            IsolatedStorageFileStream IsolatedStream;
+
             /// create a new xml serializer
             /// 
             XmlSerializer Serializer = new XmlSerializer(typeof(Xassida));
 
-            /// get a store in isolated strorage
-            /// 
-            IsolatedStorageFile IsolatedStore = IsolatedStorageFile.GetUserStoreForDomain();
-
             /// open a stream in the store
             /// 
-            IsolatedStorageFileStream IsolatedStream = new IsolatedStorageFileStream(selectedXassida.Titre, FileMode.OpenOrCreate, FileAccess.ReadWrite, IsolatedStore);
+            IsolatedStream = new IsolatedStorageFileStream(selectedXassida.FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, IsolatedStore);
 
             /// serialize the object
             /// 
             Serializer.Serialize(IsolatedStream, selectedXassida);
            
-
+            
             MessageBox.Show(IsolatedStore.AvailableFreeSpace.ToString());
         }
+
+        /// <summary>
+        /// Handle the ReadXassidaButton click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReadXassidaButton_Click(object sender, RoutedEventArgs e)
+        {
+            XassidaWindow w = new XassidaWindow();
+            w.Owner = this;
+            w.Show();
+
+        }
+
     }
 }

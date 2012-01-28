@@ -1,13 +1,18 @@
 ﻿<Window x:Class="XassidaReader.XassaidesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Xassida Reader" Height="361" Width="500"
+        Title="Xassida Reader" Height="650" Width="720"
         Loaded="Window_Loaded">
  
     <Window.Resources>
         
         <DataTemplate x:Key="PartialXassidaTemplate">                   
+            
+            <StackPanel>
                 <TextBlock  Text="{Binding Titre}" />
+                <TextBlock  Text="{Binding BeyitsCount}" />
+            </StackPanel>
+            
         </DataTemplate>
         
     </Window.Resources>
@@ -19,23 +24,25 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <ListBox ItemsSource="{Binding}" ItemTemplate="{StaticResource PartialXassidaTemplate}" HorizontalContentAlignment="Stretch" 
                  IsSynchronizedWithCurrentItem="True"  Grid.Row="0" Grid.Column="0" SelectionChanged="ListBox_SelectionChanged"
-                 x:Name="XassaidesListBox"/>
+                 x:Name="XassaidesListBox" Padding="5" />
         
-        <StackPanel Grid.Row="0" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Vertical" >
+        <StackPanel Grid.Row="0" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Vertical" Margin="5">
             
             <TextBlock x:Name="SelectedXassidaTitle" Margin="0, 0, 10, 10"/>
             
             <TextBlock x:Name="SelectedXassidaTardioumane" />
             
+            <Separator />
+            
             <WrapPanel Orientation="Horizontal">
-                <Button Content="télécharger" Visibility="Visible" Click="Dowload_Xassida_Button_Click" x:Name="DonwloadXassidaButton" />
-                <Button Content="lecture" Visibility="Visible" x:Name="ReadXassidaButton" />
+                <Button Content="télécharger" Visibility="Visible" Click="Dowload_Xassida_Button_Click" x:Name="DonwloadXassidaButton" Padding="5" Margin="5" />
+                <Button Content="lecture" Visibility="Visible" x:Name="ReadXassidaButton" Padding="5" Margin="5" Click="ReadXassidaButton_Click" />
             </WrapPanel>
             
         </StackPanel>
