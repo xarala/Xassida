@@ -67,12 +67,12 @@ namespace Xarala
             public string ToString(string format, IFormatProvider formatProvider)
             {
                 /// Creates a StringBuilder object
-                StringBuilder beyitSB = new StringBuilder("Bamba");
+                StringBuilder beyitSB = new StringBuilder();
 
                 /// Append the Bahrus to the string
                 foreach (Bahru bahru in Bahrus)
                 {
-                    beyitSB.Append(bahru.Position.ToString());
+                    beyitSB.Append(bahru.Contenu);
                 }
 
                 return beyitSB.ToString();

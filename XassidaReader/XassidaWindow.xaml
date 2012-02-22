@@ -2,20 +2,35 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:a="clr-namespace:Xarala.Xassida;assembly=SnXassidaApi"
-        Title="Xassida" Height="650" Width="720" Loaded="Window_Loaded">
-
-
-    <FlowDocument x:Name="XFlowDocument" FlowDirection="RightToLeft" 
-                  FontFamily="Arabic Typesetting" FontSize="25" FontStretch="Expanded" 
-                  IsColumnWidthFlexible="false" IsOptimalParagraphEnabled="True">   
+        Title="Xassida" Height="650" Width="720" Loaded="Window_Loaded"  Icon="Assets/XassidaReader.ico">
         
-        <Section x:Name="Description">
-            <Paragraph>
-                <TextBlock x:Name="Titre" Text="{Binding Titre}" FontSize="30" TextAlignment="Justify" FlowDirection="LeftToRight" />
-                <TextBlock x:Name="Tardioumane" Text="{Binding Tardioumane}"></TextBlock>
-            </Paragraph>
-        </Section>
+
+    <Grid>
         
-    </FlowDocument>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="240" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <StackPanel FlowDirection="RightToLeft" Grid.Column="0" Grid.Row="0">
+
+            <TextBlock x:Name="Titre" Text="{Binding Titre}" FontSize="30" TextAlignment="Center"  />
+            
+            <TextBlock x:Name="Tardioumane" Text="{Binding Tardioumane}" />
+
+        </StackPanel>
+        
+        <ListBox ItemsSource="{Binding Beyits}" Grid.Column="0" Grid.Row="1">
+            
+        </ListBox>
+
+        
+    </Grid>
     
+    
+
 </Window>

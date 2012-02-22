@@ -65,18 +65,7 @@ namespace XassidaReader
             LoadXassida();
             this.DataContext = TheXassida;
 
-            foreach (Beyit b in TheXassida.Beyits)
-            {
-                Paragraph para = new Paragraph();
-                foreach (Bahru bahru in b.Bahrus)
-                {
-                    Span r = new Span(new Run(bahru.Contenu + " "));
-                    para.Inlines.Add(r);
-                    para.MinOrphanLines = 1;
-                    para.Margin =  new Thickness(10, 10, 10, 10);
-                }
-                XFlowDocument.Blocks.Add(para);
-            }
+            
 
         }
 
