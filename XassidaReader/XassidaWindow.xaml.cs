@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using Xarala;
 using Xarala.Xassida;
+using WPFMitsuControls;
 
 namespace XassidaReader
 {
@@ -64,6 +65,19 @@ namespace XassidaReader
 
             LoadXassida();
             this.DataContext = TheXassida;
+
+
+            foreach (Beyit beyit in TheXassida.Beyits)
+            {
+
+                BookPage bp = new BookPage();
+                TextBlock tb = new TextBlock();
+                tb.Text = beyit.ToString();
+                bp.Content = tb;
+
+                readerBook.Items.Add(bp);
+
+            }
 
             
 

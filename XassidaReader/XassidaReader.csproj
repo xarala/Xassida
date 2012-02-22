@@ -139,6 +139,10 @@
     <None Include="XassidaReaderKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Downloads\wpfbookcontrol-24122\WPFMitsuControls\WPFMitsuControls.csproj">
+      <Project>{DBC99C0E-F918-4E3B-B154-C03E212D8ACA}</Project>
+      <Name>WPFMitsuControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SnXassidaApi\Xarala.Xassida.Api.csproj">
       <Project>{AFF4E885-A8BC-4172-B377-57A1CF3BC3E7}</Project>
       <Name>Xarala.Xassida.Api</Name>
