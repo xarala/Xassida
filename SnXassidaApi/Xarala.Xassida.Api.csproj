@@ -50,6 +50,7 @@
     <Compile Include="Api\Bahru.cs" />
     <Compile Include="Api\Beyit.cs" />
     <Compile Include="Api\Doc.cs" />
+    <Compile Include="Api\PaginatedCollection.cs" />
     <Compile Include="Api\Xassaides.cs" />
     <Compile Include="Api\Xassida.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

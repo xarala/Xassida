@@ -64,20 +64,29 @@ namespace XassidaReader
         {
 
             LoadXassida();
-            this.DataContext = TheXassida;
 
+            PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(TheXassida.Beyits);
 
-            foreach (Beyit beyit in TheXassida.Beyits)
+            for (int i = 0; i < pages.PagesCount; i++)
             {
 
                 BookPage bp = new BookPage();
-                TextBlock tb = new TextBlock();
-                tb.Text = beyit.ToString();
-                bp.Content = tb;
+                StackPanel panel = new StackPanel();
 
+                foreach (Beyit beyit in pages.GetData(i))
+                {
+
+                    TextBlock tb = new TextBlock();
+                    tb.Text = beyit.ToString();
+                    panel.Children.Add(tb);
+
+                }
+                bp.Content = panel;
                 readerBook.Items.Add(bp);
 
             }
+
+
 
             
 
