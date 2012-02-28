@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft;
+using Microsoft.Windows;
+using Microsoft.Windows.Controls;
+using Microsoft.Windows.Controls.Ribbon;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +27,7 @@ namespace XassidaReader
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class XassidaWindow : Window
+    public partial class XassidaWindow : RibbonWindow
     {
 
         public Xassida TheXassida;
@@ -109,8 +113,6 @@ namespace XassidaReader
 
                     TextBlock tb = new TextBlock() { Text = beyit.ToString()};
                     tb.Padding = new Thickness(10, 5, 10, 5);
-                    
-                    ///tb.Text = beyit.ToString();
                     panel.Children.Add(tb);
                 }
                 bp.Content = panel;
