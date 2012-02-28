@@ -11,7 +11,7 @@ namespace Xarala
         public sealed class PaginatedCollection <T> : IEnumerable<T>
         {
         #region fields
-            private const int DefaultPageSize = 15;
+            private const int DefaultPageSize = 10;
             private readonly IEnumerable<T> _collection;
             private int _pageSize = DefaultPageSize;
         #endregion

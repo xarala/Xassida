@@ -16,6 +16,7 @@ using System.Xml;
 using Xarala;
 using Xarala.Xassida;
 using WPFMitsuControls;
+using System.Windows.Controls.Primitives;
 
 namespace XassidaReader
 {
@@ -71,15 +72,17 @@ namespace XassidaReader
             {
 
                 BookPage bp = new BookPage();
-                StackPanel panel = new StackPanel();
+                WrapPanel panel = new WrapPanel();
+
 
                 foreach (Beyit beyit in pages.GetData(i))
                 {
 
-                    TextBlock tb = new TextBlock();
-                    tb.Text = beyit.ToString();
+                    TextBlock tb = new TextBlock() { Text = beyit.ToString()};
+                    tb.Padding = new Thickness(10, 5, 10, 5);
+                    
+                    ///tb.Text = beyit.ToString();
                     panel.Children.Add(tb);
-
                 }
                 bp.Content = panel;
                 readerBook.Items.Add(bp);

@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:a="clr-namespace:Xarala.Xassida;assembly=SnXassidaApi"
         xmlns:mitsu="clr-namespace:WPFMitsuControls;assembly=WPFMitsuControls"
-        Title="Xassida" Height="650" Width="720" Loaded="Window_Loaded"  Icon="Assets/XassidaReader.ico">
+        Title="Xassida" 
+        Loaded="Window_Loaded"  
+        Icon="Assets/XassidaReader.ico" Width="Auto">
         
 
     <!--<Grid>
@@ -33,10 +35,10 @@
     </Grid>-->
 
     <Viewbox Margin="5,5,5,40">
-        <mitsu:Book Margin="15" Name="readerBook" Height="420" Width="600" IsTabStop="False">
+        <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft">
             <mitsu:Book.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="0.5" BorderBrush="Gray" Background="White">
+                    <Border BorderThickness="0.5" BorderBrush="Gray" Background="White" Padding="10">
                         <ContentControl Content="{Binding .}" />
                     </Border>
                 </DataTemplate>
