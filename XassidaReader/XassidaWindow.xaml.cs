@@ -63,15 +63,44 @@ namespace XassidaReader
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            BookPage titlePage, tardioumanePage, bp;
 
             LoadXassida();
 
             PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(TheXassida.Beyits);
 
+            /// the title of the xassida will be the first page
+            /// 
+            titlePage = new BookPage();
+            titlePage.Content  = new TextBlock() 
+            { 
+                Padding = new Thickness(0, 70, 0, 0),
+                Text = TheXassida.Titre, 
+                FontSize = 35, 
+                Height   = 400,
+                HorizontalAlignment = HorizontalAlignment.Center, 
+                VerticalAlignment   = VerticalAlignment.Center,
+                TextAlignment       = TextAlignment.Center,
+                TextWrapping =  TextWrapping.Wrap 
+            };
+
+            readerBook.Items.Add(titlePage);
+
+            tardioumanePage = new BookPage();
+            tardioumanePage.Content = new TextBlock() 
+            { 
+                Text = TheXassida.Tardioumane, 
+                TextWrapping = TextWrapping.Wrap,
+                LineHeight   = 22
+
+            };
+
+            readerBook.Items.Add(tardioumanePage);
+
             for (int i = 0; i < pages.PagesCount; i++)
             {
 
-                BookPage bp = new BookPage();
+                bp = new BookPage();
                 WrapPanel panel = new WrapPanel();
 
 
