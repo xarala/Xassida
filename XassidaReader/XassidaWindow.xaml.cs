@@ -29,12 +29,31 @@ namespace XassidaReader
     /// </summary>
     public partial class XassidaWindow : RibbonWindow
     {
-
+        /// <summary>
+        /// The current xassida that is being viewed
+        /// </summary>
         public Xassida TheXassida;
 
+        /// <summary>
+        /// The Constructor of the window
+        /// TODO need to provide args here
+        /// </summary>
         public XassidaWindow()
         {
             InitializeComponent();
+            InitializeArabicFonts();
+        }
+
+
+        /// <summary>
+        /// Initialize Application Fonts
+        /// These will be Arabic Fonts
+        /// </summary>
+        private void InitializeArabicFonts()
+        {
+            arabicFonts.ItemsSource = Fonts.SystemFontFamilies; /* set the item source of the arabicFont combo box */
+
+            ArabicFontsComboBox.SelectedItem = "Arial"; /*set the default font */
         }
 
 
@@ -71,6 +90,8 @@ namespace XassidaReader
 
             LoadXassida();
 
+            this.DataContext = TheXassida;
+
             PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(TheXassida.Beyits);
 
             /// the title of the xassida will be the first page
@@ -94,8 +115,8 @@ namespace XassidaReader
             tardioumanePage.Content = new TextBlock() 
             { 
                 Text = TheXassida.Tardioumane, 
-                TextWrapping = TextWrapping.Wrap,
-                LineHeight   = 22
+                TextWrapping = TextWrapping.WrapWithOverflow,
+                VerticalAlignment = VerticalAlignment.Center,
 
             };
 
@@ -105,17 +126,22 @@ namespace XassidaReader
             {
 
                 bp = new BookPage();
-                WrapPanel panel = new WrapPanel();
+                StackPanel container = new StackPanel() { Orientation = Orientation.Vertical, VerticalAlignment = VerticalAlignment.Center };
 
 
                 foreach (Beyit beyit in pages.GetData(i))
                 {
 
-                    TextBlock tb = new TextBlock() { Text = beyit.ToString()};
-                    tb.Padding = new Thickness(10, 5, 10, 5);
-                    panel.Children.Add(tb);
+                    DockPanel c = new DockPanel();
+                    foreach (Bahru bahru in beyit.Bahrus)
+                    {
+                        TextBlock tb = new TextBlock() { Text = bahru.Contenu, Margin = new Thickness(4, 6, 4, 6), Width = 50 };
+                        c.Children.Add(tb);    
+                    }
+                    
+                    container.Children.Add(c);
                 }
-                bp.Content = panel;
+                bp.Content = container;
                 readerBook.Items.Add(bp);
 
             }
@@ -123,6 +149,39 @@ namespace XassidaReader
 
 
             
+
+        }
+
+
+        /// <summary>
+        /// Handle the changes in the fonts combo box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ArabicFontsComboBox_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            RibbonGallery source = (RibbonGallery) e.OriginalSource;
+
+            readerBook.FontFamily = new FontFamily(source.SelectedValue.ToString());
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
 
         }
 
