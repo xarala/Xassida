@@ -1,7 +1,4 @@
-﻿using Microsoft;
-using Microsoft.Windows;
-using Microsoft.Windows.Controls;
-using Microsoft.Windows.Controls.Ribbon;
+﻿using Fluent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +18,7 @@ using Xarala;
 using Xarala.Xassida;
 using WPFMitsuControls;
 using System.Windows.Controls.Primitives;
+using System.IO.IsolatedStorage;
 
 namespace XassidaReader
 {
@@ -29,34 +27,49 @@ namespace XassidaReader
     /// </summary>
     public partial class XassidaWindow : RibbonWindow
     {
+
+        #region Properties
+
+        /// <summary>
+        /// Defines the duration of the book animation
+        /// </summary>
+        private const int pageAnimationDuration = 600;
+        
         /// <summary>
         /// The current xassida that is being viewed
         /// </summary>
-        public Xassida TheXassida;
+        public Xassida currentXassida;
 
         /// <summary>
-        /// The Constructor of the window
-        /// TODO need to provide args here
+        /// Get the App Store where the xassidas are located
+        /// </summary>
+        IsolatedStorageFile AppStore = IsolatedStorageFile.GetUserStoreForDomain();
+
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Parameterless Constructor
         /// </summary>
         public XassidaWindow()
         {
             InitializeComponent();
-            InitializeArabicFonts();
-        }
 
+            //previousPagBtn.IsEnabled = false; // Disable the previous page button
+        }
 
         /// <summary>
-        /// Initialize Application Fonts
-        /// These will be Arabic Fonts
+        /// Constructor with a xassida name as a parameter
         /// </summary>
-        private void InitializeArabicFonts()
+        /// <param name="xassida"></param>
+        public XassidaWindow(string xassida)
         {
-            arabicFonts.ItemsSource = Fonts.SystemFontFamilies; /* set the item source of the arabicFont combo box */
 
-            ArabicFontsComboBox.SelectedItem = "Arial"; /*set the default font */
         }
 
+        #endregion
 
+        #region Private Methods
         private void LoadXassida()
         {
             RawXsdDocument doc = new RawXsdDocument("xassaides/4.xml");
@@ -66,7 +79,7 @@ namespace XassidaReader
             String Tardioumane = xassida.Attributes["tardioumane"].InnerText;
             int BahrusCount = Convert.ToInt16(xassida.Attributes["bahrus_count"].InnerText);
 
-            TheXassida = new Xassida(Titre, Tardioumane, BahrusCount);
+            currentXassida = new Xassida(Titre, Tardioumane, BahrusCount);
 
             foreach (XmlElement beyit in xassida.ChildNodes)
             {
@@ -80,9 +93,17 @@ namespace XassidaReader
                     Bahru bhr = new Bahru(BPosition, Contenu);
                     byt.Bahrus.Add(bhr);
                 }
-                TheXassida.Beyits.Add(byt);
+                currentXassida.Beyits.Add(byt);
             }   
         }
+        #endregion
+
+        #region Window Event Handlers
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -90,31 +111,33 @@ namespace XassidaReader
 
             LoadXassida();
 
-            this.DataContext = TheXassida;
+            this.DataContext = currentXassida;
 
-            PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(TheXassida.Beyits);
+            PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(currentXassida.Beyits);
 
             /// the title of the xassida will be the first page
             /// 
             titlePage = new BookPage();
-            titlePage.Content  = new TextBlock() 
-            { 
-                Padding = new Thickness(0, 70, 0, 0),
-                Text = TheXassida.Titre, 
-                FontSize = 35, 
-                Height   = 400,
-                HorizontalAlignment = HorizontalAlignment.Center, 
-                VerticalAlignment   = VerticalAlignment.Center,
-                TextAlignment       = TextAlignment.Center,
-                TextWrapping =  TextWrapping.Wrap 
+
+            StackPanel p = new StackPanel() { VerticalAlignment = VerticalAlignment.Center };
+            TextBlock tPageTb = new TextBlock()
+            {
+                Text = currentXassida.Titre,
+                FontSize = 35,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                TextAlignment = TextAlignment.Center,
+                TextWrapping = TextWrapping.Wrap
             };
+            p.Children.Add(tPageTb);
+            titlePage.Content = p;
 
             readerBook.Items.Add(titlePage);
 
             tardioumanePage = new BookPage();
             tardioumanePage.Content = new TextBlock() 
             { 
-                Text = TheXassida.Tardioumane, 
+                Text = currentXassida.Tardioumane, 
                 TextWrapping = TextWrapping.WrapWithOverflow,
                 VerticalAlignment = VerticalAlignment.Center,
 
@@ -152,38 +175,119 @@ namespace XassidaReader
 
         }
 
-
         /// <summary>
-        /// Handle the changes in the fonts combo box
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ArabicFontsComboBox_SelectionChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void nextPageBtn_Click(object sender, RoutedEventArgs e)
         {
-            RibbonGallery source = (RibbonGallery) e.OriginalSource;
+            if (readerBook.CurrentSheetIndex < readerBook.GetItemsCount() / 2)
+            {
+                readerBook.AnimateToNextPage(true, pageAnimationDuration);
+                //readerBook.CurrentSheetIndex++;
+            }
 
-            readerBook.FontFamily = new FontFamily(source.SelectedValue.ToString());
+            if (!previousPagBtn.IsEnabled)
+            {
+                previousPagBtn.IsEnabled = true;
+            }
         }
 
         /// <summary>
-        /// TODO
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void previousPagBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (readerBook.CurrentSheetIndex > 0)
+            {
+                //readerBook.CurrentSheetIndex--;
+                readerBook.AnimateToPreviousPage(true, pageAnimationDuration);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pdfButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
         /// <summary>
-        /// TODO
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void timelineSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void pptButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mp3Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void kurelButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rajazButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void leeralButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void arabicFontsGallery_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

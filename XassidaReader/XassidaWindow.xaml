@@ -1,68 +1,106 @@
 ﻿<r:RibbonWindow x:Class="XassidaReader.XassidaWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:api="clr-namespace:Xarala.Xassida;assembly=SnXassidaApi"
-        xmlns:mitsu="clr-namespace:WPFMitsuControls;assembly=WPFMitsuControls"
-        xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
-        Loaded="Window_Loaded"  
-        Icon="Assets/XassidaReader.ico"
-        WindowStartupLocation="CenterScreen" 
-        WindowState="Maximized"
-        >
-
-
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:api="clr-namespace:Xarala.Xassida;assembly=SnXassidaApi"
+    xmlns:mitsu="clr-namespace:WPFMitsuControls;assembly=WPFMitsuControls"
+    xmlns:r="clr-namespace:Fluent;assembly=Fluent"                
+    Loaded="Window_Loaded"  
+    Icon="Assets/XassidaReader.ico"
+    WindowStartupLocation="CenterScreen" 
+    WindowState="Maximized"
+    Title="{Binding Path=Titre}"
+    >
+    
     <Grid x:Name="LayoutRoot">
         
         
         <Grid.RowDefinitions>
-            <RowDefinition Height="90" />
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
 
-        <r:Ribbon Title="{Binding Path=Titre}" x:Name="ribbonBase" Grid.Row="0" IsMinimized="True">
-
-            <r:RibbonTab Header="Xassida">
-
-                <r:RibbonGroup Header="Caractères" VerticalContentAlignment="Top">
-
-                    <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
-                        <TextBlock Text="    caractères    " />
-                        <r:RibbonComboBox HorizontalAlignment="Stretch" Margin="2">
-                            <r:RibbonGallery x:Name="ArabicFontsComboBox" SelectionChanged="ArabicFontsComboBox_SelectionChanged">
-                                <r:RibbonGalleryCategory x:Name="arabicFonts" />
-                            </r:RibbonGallery>
-                        </r:RibbonComboBox>
-                    </StackPanel>
-                        
-                </r:RibbonGroup>
-
-
-                <r:RibbonGroup Header="Audio" VerticalContentAlignment="Top">
-
-                    <StackPanel VerticalAlignment="Top" Orientation="Horizontal">                       
-                        
-                        <TextBlock VerticalAlignment="Center" Margin="5" Text="Audio Player" />
-                        
-                    </StackPanel>
-
-                </r:RibbonGroup>
-
-            </r:RibbonTab>
-
-            <r:RibbonTab Header="Exporter"></r:RibbonTab>
-
-            <r:RibbonTab Header="Impression" />
-
-            <r:RibbonTab Header="A propos" />
+        <r:Ribbon x:Name="ribbonBase" Grid.Row="0" IsMinimized="True">
             
-            <r:RibbonTab Header="Aide ?" />
+            <r:Ribbon.ContextualGroups>
+                <r:RibbonContextualTabGroup Header="Xassida Reader" x:Name="ReaderGroup" Visibility="Visible" Background="DarkBlue" />
+            </r:Ribbon.ContextualGroups>
+            
+            <r:Ribbon.Menu>
+                <r:Backstage>
+                    <r:BackstageTabControl>
+                        <r:BackstageTabItem Header="Ma Bibliothèque"/>
+                        <r:BackstageTabItem Header="Bibliothèque en ligne"/>
+                        <r:BackstageTabItem Header="Exporter"/>
+                        <r:BackstageTabItem Header="Imprimer"/>
+                        <r:BackstageTabItem Header="Quitter"/>
+                    </r:BackstageTabControl>
+                </r:Backstage>
+            </r:Ribbon.Menu>
+
+            <r:RibbonTabItem Header="Accueil" Group="{Binding ElementName=ReaderGroup}">
+
+                <r:RibbonGroupBox Header="Presse papier et caractères">
+                    <r:Spinner Name="arabicFontsGallery"   Header="Caractères" />
+                    <LineBreak />
+                    <r:Spinner Name="fontSizeSpinner"   Header="Taille du texte" />
+                </r:RibbonGroupBox>
+
+                <r:RibbonGroupBox Header="Exporter" VerticalContentAlignment="Top">
+                    
+                    <r:Button Header="WORD" LargeIcon="Images\Ribbon\docLarge.png" Icon="Images\Ribbon\doc.png" Name="docButton" Click="pptButton_Click">
+                        <r:Button.ToolTip >
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office Word." Image="Images\Ribbon\docScreenTip.png" 
+                                         Width="250" />
+                        </r:Button.ToolTip>
+                    </r:Button>
+
+                    <r:Button Header="TEXTE" LargeIcon="Images\Ribbon\txtLarge.png" Icon="Images\Ribbon\txt.png" Name="txtButton" Click="txtButton_Click">
+                        <r:Button.ToolTip>
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format texte." Image="Images\Ribbon\txtScreentip.png"
+                                         Width="250" />
+                        </r:Button.ToolTip>
+                    </r:Button>
+                    <r:Button Header="PDF" LargeIcon="Images\Ribbon\pdfLarge.png" Icon="Images\Ribbon\pdf.png" Name="pdfButton" Click="pdfButton_Click">
+                        <r:Button.ToolTip>
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format PDF compatible Adobe Reader." Image="Images\Ribbon\pdfScreenTip.png"
+                                         Width="250" />
+                        </r:Button.ToolTip>
+                    </r:Button>
+                    <r:Button Header="PPT" LargeIcon="Images\Ribbon\pptLarge.png" Icon="Images\Ribbon\ppt.png" Name="pptButton" Click="pptButton_Click">
+                        <r:Button.ToolTip>
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office PowerPoint." Image="Images\Ribbon\pptScreentip.png"
+                                         Width="250" />
+                        </r:Button.ToolTip>
+                    </r:Button>
+                </r:RibbonGroupBox>
+
+
+                <r:RibbonGroupBox Header="Audio" VerticalContentAlignment="Center">
+                    <r:Button Header="KUREL" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="kurelButton" Click="kurelButton_Click" />
+                    <r:Button Header="RAJAZ" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="rajazButton" Click="rajazButton_Click" />
+                    <r:Button Header="LEERAL" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="leeralButton" Click="leeralButton_Click" />
+                </r:RibbonGroupBox>
+
+            </r:RibbonTabItem>
+
+            <r:RibbonTabItem Header="Ma librairie">
+                <r:RibbonGroupBox>
+                    <r:InRibbonGallery MaxItemsInRow="10" ItemWidth="50" ItemHeight="20" ItemsSource="{Binding MaBiblitotheque}" />
+                </r:RibbonGroupBox>
+            </r:RibbonTabItem>
+
+            <r:RibbonTabItem Header="Options" />
+            
+            <r:RibbonTabItem Header="A propos" />
+            
+            <r:RibbonTabItem Header="Aide ?" />
 
         </r:Ribbon>
 
         <Viewbox Grid.Row="1" Width="{Binding ElementName=screenResizer, Path=Value}" Height="{Binding ElementName=screenResizer, Path=Value}">
-            <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Center">
+            <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Arial">
                 <mitsu:Book.ItemTemplate>
                     <DataTemplate>
                         <Border BorderThickness="0.5" BorderBrush="Gray" Background="White" Padding="10">
@@ -74,9 +112,46 @@
         </Viewbox>
 
 
-        <StatusBar Grid.Row="2" VerticalAlignment="Center" Background="White">
-            <TextBlock Text="taille du texte"/>
-            <Slider x:Name="screenResizer" Width="200" Value="700" Minimum="600" Maximum="1000" />
+        <StatusBar Grid.Row="2" VerticalAlignment="Center" Background="White" VerticalContentAlignment="Center">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+            </Grid>
+
+            <DockPanel Grid.Column="0">
+                <Image Source="Assets\Xassida.png" Margin="0, 0, 10, 0" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding Path=Titre}" Margin="0, 5, 0, 5" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Beyits.Count}" />
+                        <TextBlock Text=" Beyits" />
+                    </StackPanel>                    
+                </StackPanel>
+                
+            </DockPanel>
+            
+            
+            <TextBlock Text="taille du texte" Grid.Column="1" />
+            
+            <Slider x:Name="screenResizer" Width="200" Value="700" Minimum="600" Maximum="900" Grid.Column="2" />
+            
+            <DockPanel Grid.Column="3">
+                <Button x:Name="nextPageBtn" Content="page suivante" Click="nextPageBtn_Click" Margin="0, 0, 5, 0" />
+                <Button x:Name="previousPagBtn" Content="page précédente" Click="previousPagBtn_Click" />
+            </DockPanel>
+
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="page/" x:Name="currentPageIndex"/>
+                <TextBlock Text="total" x:Name="totalPages"/>
+            </StackPanel>
+
         </StatusBar>
         
     </Grid>

@@ -4,9 +4,9 @@
              Startup="Application_Startup">
     
     <Application.Resources>
-
-
         
+        <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Silver.xaml" /> <!-- Fluent theme config -->
+
     </Application.Resources>
     
 </Application>
