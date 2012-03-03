@@ -19,6 +19,7 @@ using Xarala.Xassida;
 using WPFMitsuControls;
 using System.Windows.Controls.Primitives;
 using System.IO.IsolatedStorage;
+using System.Collections.ObjectModel;
 
 namespace XassidaReader
 {
@@ -43,7 +44,12 @@ namespace XassidaReader
         /// <summary>
         /// Get the App Store where the xassidas are located
         /// </summary>
-        IsolatedStorageFile AppStore = IsolatedStorageFile.GetUserStoreForDomain();
+        IsolatedStorageFile AppStore;
+
+        /// <summary>
+        /// A list of xassidas naames that the user has downloaded in his computer
+        /// </summary>
+        public List<Xassida> myLibraryItemNames;
 
         #endregion
 
@@ -107,6 +113,9 @@ namespace XassidaReader
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            myLibraryItemNames = new List<Xassida>();
+            
             BookPage titlePage, tardioumanePage, bp;
 
             LoadXassida();
@@ -169,9 +178,17 @@ namespace XassidaReader
 
             }
 
+            AppStore = IsolatedStorageFile.GetUserStoreForDomain();
+            // Check for files saved in isolated storage
+            foreach (string file in AppStore.GetFileNames())
+            {
+                myLibraryItemNames.Add(new Xassida() { Titre = file});
+            }
+
+            // Set the items source of the myLibrary List view 
 
 
-            
+            myLibraryListView.ItemsSource = myLibraryItemNames;
 
         }
 
@@ -288,6 +305,19 @@ namespace XassidaReader
 
         }
 
+        /// <summary>
+        /// Handles when the user clicks in an item in the myLibraryListView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void myLibraryListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            object current = myLibraryListView.SelectedItem;
+            MessageBox.Show(current.ToString());
+        }
+
         #endregion
+
+
     }
 }

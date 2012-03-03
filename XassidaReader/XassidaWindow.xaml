@@ -24,13 +24,37 @@
         <r:Ribbon x:Name="ribbonBase" Grid.Row="0" IsMinimized="True">
             
             <r:Ribbon.ContextualGroups>
-                <r:RibbonContextualTabGroup Header="Xassida Reader" x:Name="ReaderGroup" Visibility="Visible" Background="DarkBlue" />
+                <r:RibbonContextualTabGroup Header="Xarala Xassida Reader" x:Name="ReaderGroup" Visibility="Visible" Background="DarkBlue" />
             </r:Ribbon.ContextualGroups>
             
             <r:Ribbon.Menu>
                 <r:Backstage>
                     <r:BackstageTabControl>
-                        <r:BackstageTabItem Header="Ma Bibliothèque"/>
+                        <r:BackstageTabItem Header="Save" />
+                        <r:BackstageTabItem Header="Save As" />
+                        <r:BackstageTabItem Header="Ma Bibliothèque" >
+                            <ListBox x:Name="myLibraryListView" MouseDoubleClick="myLibraryListView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel IsItemsHost="True" />
+                                    </ItemsPanelTemplate>                                    
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        
+                                        <Border BorderThickness="0.6" BorderBrush="Gray" Margin="10" Padding="10" Width="300">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="Assets\Xassida.png" Margin="0, 0, 10, 0" />
+                                                <TextBlock Text="{Binding Path=Titre}" Foreground="Black" FontWeight="Bold" FontFamily="Arabic Typesetting" FontSize="20" 
+                                                           VerticalAlignment="Center"  />
+                                            
+                                            </StackPanel>
+                                        </Border>                                     
+                                        
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </r:BackstageTabItem>
                         <r:BackstageTabItem Header="Bibliothèque en ligne"/>
                         <r:BackstageTabItem Header="Exporter"/>
                         <r:BackstageTabItem Header="Imprimer"/>
@@ -39,7 +63,7 @@
                 </r:Backstage>
             </r:Ribbon.Menu>
 
-            <r:RibbonTabItem Header="Accueil" Group="{Binding ElementName=ReaderGroup}">
+            <r:RibbonTabItem Header="Accueil">
 
                 <r:RibbonGroupBox Header="Presse papier et caractères">
                     <r:Spinner Name="arabicFontsGallery"   Header="Caractères" />
@@ -85,17 +109,17 @@
 
             </r:RibbonTabItem>
 
-            <r:RibbonTabItem Header="Ma librairie">
+            <r:RibbonTabItem Header="Ma librairie" >
                 <r:RibbonGroupBox>
                     <r:InRibbonGallery MaxItemsInRow="10" ItemWidth="50" ItemHeight="20" ItemsSource="{Binding MaBiblitotheque}" />
                 </r:RibbonGroupBox>
             </r:RibbonTabItem>
 
             <r:RibbonTabItem Header="Options" />
-            
-            <r:RibbonTabItem Header="A propos" />
-            
-            <r:RibbonTabItem Header="Aide ?" />
+
+            <r:RibbonTabItem Header="A propos" Group="{Binding ElementName=ReaderGroup}" />
+
+            <r:RibbonTabItem Header="Aide ?"  Group="{Binding ElementName=ReaderGroup}" />
 
         </r:Ribbon>
 
@@ -103,7 +127,7 @@
             <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Arial">
                 <mitsu:Book.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="0.5" BorderBrush="Gray" Background="White" Padding="10">
+                        <Border BorderThickness="0.6" BorderBrush="Black" Background="White" Padding="10">
                             <ContentControl Content="{Binding .}" />
                         </Border>
                     </DataTemplate>
@@ -112,45 +136,33 @@
         </Viewbox>
 
 
-        <StatusBar Grid.Row="2" VerticalAlignment="Center" Background="White" VerticalContentAlignment="Center">
+        <StatusBar VerticalAlignment="Center" Background="White" VerticalContentAlignment="Stretch" Grid.Row="2" HorizontalAlignment="Stretch">
             
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                
-            </Grid>
-
-            <DockPanel Grid.Column="0">
-                <Image Source="Assets\Xassida.png" Margin="0, 0, 10, 0" />
+            <DockPanel >
+                <Image Source="Assets\Xassida.png" Margin="0, 0, 10, 0" Stretch="None" />
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="{Binding Path=Titre}" Margin="0, 5, 0, 5" />
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Path=Beyits.Count}" />
                         <TextBlock Text=" Beyits" />
-                    </StackPanel>                    
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="page/" x:Name="currentPageIndex"/>
+                        <TextBlock Text="total" x:Name="totalPages"/>
+                    </StackPanel>
                 </StackPanel>
-                
             </DockPanel>
             
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="taille du texte"/>
+                <Slider x:Name="screenResizer" Width="200" Value="700" Minimum="600" Maximum="900"  />
+            </StackPanel>          
             
-            <TextBlock Text="taille du texte" Grid.Column="1" />
-            
-            <Slider x:Name="screenResizer" Width="200" Value="700" Minimum="600" Maximum="900" Grid.Column="2" />
-            
-            <DockPanel Grid.Column="3">
-                <Button x:Name="nextPageBtn" Content="page suivante" Click="nextPageBtn_Click" Margin="0, 0, 5, 0" />
+            <DockPanel>
+                <Button x:Name="nextPageBtn" Content="page suivante" Click="nextPageBtn_Click" Margin="0, 0, 5, 0"  />
                 <Button x:Name="previousPagBtn" Content="page précédente" Click="previousPagBtn_Click" />
             </DockPanel>
-
-            <StackPanel Grid.Column="4">
-                <TextBlock Text="page/" x:Name="currentPageIndex"/>
-                <TextBlock Text="total" x:Name="totalPages"/>
-            </StackPanel>
 
         </StatusBar>
         

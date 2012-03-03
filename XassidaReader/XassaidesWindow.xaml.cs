@@ -39,7 +39,9 @@ namespace XassidaReader
         /// 
         IsolatedStorageFile IsolatedStore = IsolatedStorageFile.GetUserStoreForDomain();
 
-
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public XassaidesWindow()
         {
             InitializeComponent();
