@@ -206,55 +206,58 @@
     <Resource Include="SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\ppt.png" />
+    <Resource Include="Assets\Ribbon\ppt.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\pdf.png" />
+    <Resource Include="Assets\Ribbon\pdf.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\pdfLarge.png" />
+    <Resource Include="Assets\Ribbon\pdfLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\pptLarge.png" />
+    <Resource Include="Assets\Ribbon\pptLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\doc.png" />
+    <Resource Include="Assets\Ribbon\doc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\docLarge.png" />
+    <Resource Include="Assets\Ribbon\docLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\txt-.png" />
+    <Resource Include="Assets\Ribbon\txt-.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\txtLarge.png" />
+    <Resource Include="Assets\Ribbon\txtLarge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\mp3.png" />
+    <Resource Include="Assets\Ribbon\mp3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\mp3Large.png" />
+    <Resource Include="Assets\Ribbon\mp3Large.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\docScreenTip.png" />
+    <Resource Include="Assets\Ribbon\docScreenTip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\txtScreenTip.png" />
+    <Resource Include="Assets\Ribbon\txtScreenTip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\mp3ScreenTip.png" />
+    <Resource Include="Assets\Ribbon\mp3ScreenTip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\pptScreenTip.png" />
+    <Resource Include="Assets\Ribbon\pptScreenTip.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Ribbon\pdfScreenTip.png" />
+    <Resource Include="Assets\Ribbon\pdfScreenTip.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Xassida.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Licenses\WpfBookControl.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

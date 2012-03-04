@@ -30,35 +30,39 @@
             <r:Ribbon.Menu>
                 <r:Backstage>
                     <r:BackstageTabControl>
-                        <r:BackstageTabItem Header="Save" />
-                        <r:BackstageTabItem Header="Save As" />
+                        <r:Button Header="Enregistrer" />
+                        <r:Button Header="Enregistrer Sous" />
+                        <r:Button Header="Imprimer"  />
                         <r:BackstageTabItem Header="Ma Bibliothèque" >
-                            <ListBox x:Name="myLibraryListView" MouseDoubleClick="myLibraryListView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox x:Name="myLibraryListView" MouseDoubleClick="myLibraryListView_MouseDoubleClick" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel IsItemsHost="True" />
                                     </ItemsPanelTemplate>                                    
                                 </ListBox.ItemsPanel>
                                 <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        
+                                    <DataTemplate>                                        
                                         <Border BorderThickness="0.6" BorderBrush="Gray" Margin="10" Padding="10" Width="300">
                                             <StackPanel Orientation="Horizontal">
                                                 <Image Source="Assets\Xassida.png" Margin="0, 0, 10, 0" />
                                                 <TextBlock Text="{Binding Path=Titre}" Foreground="Black" FontWeight="Bold" FontFamily="Arabic Typesetting" FontSize="20" 
-                                                           VerticalAlignment="Center"  />
-                                            
+                                                           VerticalAlignment="Center"  />                                            
                                             </StackPanel>
-                                        </Border>                                     
-                                        
+                                        </Border>  
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </r:BackstageTabItem>
-                        <r:BackstageTabItem Header="Bibliothèque en ligne"/>
-                        <r:BackstageTabItem Header="Exporter"/>
-                        <r:BackstageTabItem Header="Imprimer"/>
-                        <r:BackstageTabItem Header="Quitter"/>
+                        <r:BackstageTabItem Header="Librairie en ligne"/>
+                        <r:BackstageTabItem Header="Exporter">
+                            <r:MenuPanel Margin="10">
+                                <r:MenuItem Header="Document Word" Icon="Assets\Ribbon\docLarge.png"   />
+                                <r:MenuItem Header="Document PDF" Icon="Assets\Ribbon\pdfScreenTip.png"/>
+                                <r:MenuItem Header="Document Powerpoint" Icon="Assets\Ribbon\pptScreenTip.png"  />
+                                <r:MenuItem Header="Document Texte" Icon="Assets\Ribbon\txtScreenTip.png"  />
+                            </r:MenuPanel>                            
+                        </r:BackstageTabItem>
+                        <r:Button Header="Quitter" />
                     </r:BackstageTabControl>
                 </r:Backstage>
             </r:Ribbon.Menu>
@@ -73,28 +77,28 @@
 
                 <r:RibbonGroupBox Header="Exporter" VerticalContentAlignment="Top">
                     
-                    <r:Button Header="WORD" LargeIcon="Images\Ribbon\docLarge.png" Icon="Images\Ribbon\doc.png" Name="docButton" Click="pptButton_Click">
+                    <r:Button Header="WORD" LargeIcon="Assets\Ribbon\docLarge.png" Icon="Assets\Ribbon\doc.png" Name="docButton" Click="pptButton_Click">
                         <r:Button.ToolTip >
-                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office Word." Image="Images\Ribbon\docScreenTip.png" 
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office Word." Image="Assets\Ribbon\docScreenTip.png" 
                                          Width="250" />
                         </r:Button.ToolTip>
                     </r:Button>
 
-                    <r:Button Header="TEXTE" LargeIcon="Images\Ribbon\txtLarge.png" Icon="Images\Ribbon\txt.png" Name="txtButton" Click="txtButton_Click">
+                    <r:Button Header="TEXTE" LargeIcon="Assets\Ribbon\txtLarge.png" Icon="Assets\Ribbon\txt.png" Name="txtButton" Click="txtButton_Click">
                         <r:Button.ToolTip>
-                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format texte." Image="Images\Ribbon\txtScreentip.png"
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format texte." Image="Assets\Ribbon\txtScreentip.png"
                                          Width="250" />
                         </r:Button.ToolTip>
                     </r:Button>
-                    <r:Button Header="PDF" LargeIcon="Images\Ribbon\pdfLarge.png" Icon="Images\Ribbon\pdf.png" Name="pdfButton" Click="pdfButton_Click">
+                    <r:Button Header="PDF" LargeIcon="Assets\Ribbon\pdfLarge.png" Icon="Assets\Ribbon\pdf.png" Name="pdfButton" Click="pdfButton_Click">
                         <r:Button.ToolTip>
-                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format PDF compatible Adobe Reader." Image="Images\Ribbon\pdfScreenTip.png"
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida au format PDF compatible Adobe Reader." Image="Assets\Ribbon\pdfScreenTip.png"
                                          Width="250" />
                         </r:Button.ToolTip>
                     </r:Button>
-                    <r:Button Header="PPT" LargeIcon="Images\Ribbon\pptLarge.png" Icon="Images\Ribbon\ppt.png" Name="pptButton" Click="pptButton_Click">
+                    <r:Button Header="PPT" LargeIcon="Assets\Ribbon\pptLarge.png" Icon="Assets\Ribbon\ppt.png" Name="pptButton" Click="pptButton_Click">
                         <r:Button.ToolTip>
-                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office PowerPoint." Image="Images\Ribbon\pptScreentip.png"
+                            <r:ScreenTip Title="Exporter" Text="Ce bouton vous permet d'exporter le xassida vers Microsoft Office PowerPoint." Image="Assets\Ribbon\pptScreentip.png"
                                          Width="250" />
                         </r:Button.ToolTip>
                     </r:Button>
@@ -102,9 +106,9 @@
 
 
                 <r:RibbonGroupBox Header="Audio" VerticalContentAlignment="Center">
-                    <r:Button Header="KUREL" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="kurelButton" Click="kurelButton_Click" />
-                    <r:Button Header="RAJAZ" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="rajazButton" Click="rajazButton_Click" />
-                    <r:Button Header="LEERAL" LargeIcon="Images\Ribbon\mp3Large.png" Icon="Images\Ribbon\mp3.png" Name="leeralButton" Click="leeralButton_Click" />
+                    <r:Button Header="KUREL" LargeIcon="Assets\Ribbon\mp3Large.png" Icon="Assets\Ribbon\mp3.png" Name="kurelButton" Click="kurelButton_Click" />
+                    <r:Button Header="RAJAZ" LargeIcon="Assets\Ribbon\mp3Large.png" Icon="Assets\Ribbon\mp3.png" Name="rajazButton" Click="rajazButton_Click" />
+                    <r:Button Header="LEERAL" LargeIcon="Assets\Ribbon\mp3Large.png" Icon="Assets\Ribbon\mp3.png" Name="leeralButton" Click="leeralButton_Click" />
                 </r:RibbonGroupBox>
 
             </r:RibbonTabItem>
@@ -117,21 +121,16 @@
 
             <r:RibbonTabItem Header="Options" />
 
-            <r:RibbonTabItem Header="A propos" Group="{Binding ElementName=ReaderGroup}" />
 
-            <r:RibbonTabItem Header="Aide ?"  Group="{Binding ElementName=ReaderGroup}" />
+            <r:RibbonTabItem Header="Aide ?"  />
+            
+            <r:RibbonTabItem Header="A propos" Group="{Binding ElementName=ReaderGroup}" />
 
         </r:Ribbon>
 
         <Viewbox Grid.Row="1" Width="{Binding ElementName=screenResizer, Path=Value}" Height="{Binding ElementName=screenResizer, Path=Value}">
             <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Arial">
-                <mitsu:Book.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="0.6" BorderBrush="Black" Background="White" Padding="10">
-                            <ContentControl Content="{Binding .}" />
-                        </Border>
-                    </DataTemplate>
-                </mitsu:Book.ItemTemplate>
+               
             </mitsu:Book>
         </Viewbox>
 

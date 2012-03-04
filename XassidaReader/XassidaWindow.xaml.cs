@@ -51,6 +51,8 @@ namespace XassidaReader
         /// </summary>
         public List<Xassida> myLibraryItemNames;
 
+        public PaginatedCollection<Beyit> PagesCollection;
+
         #endregion
 
         #region Constructors
@@ -122,7 +124,7 @@ namespace XassidaReader
 
             this.DataContext = currentXassida;
 
-            PaginatedCollection<Beyit> pages = new PaginatedCollection<Beyit>(currentXassida.Beyits);
+            PagesCollection = new PaginatedCollection<Beyit>(currentXassida.Beyits);
 
             /// the title of the xassida will be the first page
             /// 
@@ -154,14 +156,14 @@ namespace XassidaReader
 
             readerBook.Items.Add(tardioumanePage);
 
-            for (int i = 0; i < pages.PagesCount; i++)
+            for (int i = 0; i < PagesCollection.PagesCount; i++)
             {
 
                 bp = new BookPage();
                 StackPanel container = new StackPanel() { Orientation = Orientation.Vertical, VerticalAlignment = VerticalAlignment.Center };
 
 
-                foreach (Beyit beyit in pages.GetData(i))
+                foreach (Beyit beyit in PagesCollection.GetData(i))
                 {
 
                     DockPanel c = new DockPanel();
