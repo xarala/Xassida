@@ -130,7 +130,13 @@
 
         <Viewbox Grid.Row="1" Width="{Binding ElementName=screenResizer, Path=Value}" Height="{Binding ElementName=screenResizer, Path=Value}">
             <mitsu:Book Name="readerBook" IsTabStop="False" FlowDirection="RightToLeft"  VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Arial">
-               
+                <mitsu:Book.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" BorderThickness="0.6" BorderBrush="Gray" Padding="5">
+                            <ContentControl Content="{Binding .}" />
+                        </Border>
+                    </DataTemplate>
+                </mitsu:Book.ItemTemplate>
             </mitsu:Book>
         </Viewbox>
 
