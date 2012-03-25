@@ -21,7 +21,7 @@ namespace Xarala
             /// </summary>
             public Xassaides()
             {
-
+                Library = new List<Xassida>();
             }
 
             #endregion
@@ -32,7 +32,7 @@ namespace Xarala
             /// <summary>
             /// A list of strongly types Xassaides
             /// </summary>
-            List<Xassida> Library { get; set; }
+            public List<Xassida> Library { get; set; }
 
             #endregion
 
