@@ -17,10 +17,13 @@ namespace Xarala
         [XmlType(TypeName="Xassida", Namespace = "http://xassida.org/xassaides")]
         public sealed class Xassida : IFormattable
         {
+            #region CONSTRUCTORS
+
             /// <summary>
             /// Parameterless Constructor
             /// </summary>
             public Xassida() { }
+
 
             /// <summary>
             /// Constructor
@@ -32,12 +35,13 @@ namespace Xarala
             {
                 Titre = titre;
                 Tardioumane = tardioumane;
-                Nombrebahrus = nombreBahrus;
-                    
-                /// Creates an empty list of beyits
-                /// 
-                Beyits = new List<Beyit>();
+                Nombrebahrus = nombreBahrus;                
+                Beyits = new List<Beyit>(); /// Crée une nouvelle liste de beyits
             }
+
+            #endregion
+
+            #region PROPERTIES
 
             /// <summary>
             /// le titre du xassida
@@ -81,9 +85,13 @@ namespace Xarala
             [XmlArrayAttribute] /// Indicates that the attribute is serialized as an xml attribute
             public List<Beyit> Beyits { get; set; }
 
+            #endregion
+
+            #region METHODS
+            
             /// <summary>
             /// Override Default to String
-            ///   call the IFormattable ToString() method
+            ///   call the IFormattable ToString(null, null) method
             /// </summary>
             /// <returns>String</returns>
             public override string ToString()
@@ -102,6 +110,7 @@ namespace Xarala
                 return Titre;
             }
 
+            #endregion
         }
   
     }

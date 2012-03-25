@@ -10,13 +10,13 @@ namespace Xarala
 
     namespace Xassida
     {
-
         /// <summary>
         /// Beyit Class
         /// </summary>
         public sealed class Beyit : IFormattable
         {
-
+            #region CONSTRUCTORS
+            
             /// <summary>
             /// ParameterLess Constructor
             /// </summary>
@@ -28,13 +28,16 @@ namespace Xarala
             /// <param name="position"></param>
             public Beyit(int position)
             {
-                /// Set the position attribute from params
-                /// 
-                Position = position;
-                /// Creates an empty list of Bahrus
-                /// 
-                Bahrus = new List<Bahru>();
+
+                Position    = position; /// Set the position attribute from params
+                Bahrus      = new List<Bahru>(); /// Creates an empty list of Bahrus
+                Traductions = new List<Traduction>(); /// Creates an empty list of traductions
+
             }
+
+            #endregion
+
+            #region PROPERTIES
 
             /// <summary>
             /// La position du beyit dans le xassaide
@@ -47,7 +50,16 @@ namespace Xarala
             /// 
             [XmlArrayAttribute]
             public List<Bahru> Bahrus { get; set; }
+            
+            /// <summary>
+            /// Une liste de traductions du beyit
+            /// </summary>
+            public List<Traduction> Traductions { get; set; }
 
+            #endregion
+
+            #region METHODS
+           
             /// <summary>
             /// Override default ToString() method
             /// </summary>
@@ -78,8 +90,12 @@ namespace Xarala
                 return beyitSB.ToString();
             }
 
+            #endregion
+
         }
+
     }
+
 }
     
 

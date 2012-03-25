@@ -24,7 +24,7 @@
         <r:Ribbon x:Name="ribbonBase" Grid.Row="0" IsMinimized="True">
             
             <r:Ribbon.ContextualGroups>
-                <r:RibbonContextualTabGroup Header="Xarala Xassida Reader" x:Name="ReaderGroup" Visibility="Visible" Background="DarkBlue" />
+                <r:RibbonContextualTabGroup Header="XassidaReader" x:Name="ReaderGroup" Visibility="Visible" Background="DarkBlue" />
             </r:Ribbon.ContextualGroups>
             
             <r:Ribbon.Menu>
@@ -113,7 +113,7 @@
 
             </r:RibbonTabItem>
 
-            <r:RibbonTabItem Header="Ma librairie" >
+            <r:RibbonTabItem Header="My Library" >
                 <r:RibbonGroupBox>
                     <r:InRibbonGallery MaxItemsInRow="10" ItemWidth="50" ItemHeight="20" ItemsSource="{Binding MaBiblitotheque}" />
                 </r:RibbonGroupBox>
@@ -122,9 +122,9 @@
             <r:RibbonTabItem Header="Options" />
 
 
+            <r:RibbonTabItem Header="About" Group="{Binding ElementName=ReaderGroup}" />
+
             <r:RibbonTabItem Header="Aide ?"  />
-            
-            <r:RibbonTabItem Header="A propos" Group="{Binding ElementName=ReaderGroup}" />
 
         </r:Ribbon>
 

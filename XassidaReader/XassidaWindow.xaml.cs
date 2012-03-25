@@ -51,6 +51,9 @@ namespace XassidaReader
         /// </summary>
         public List<Xassida> myLibraryItemNames;
 
+        /// <summary>
+        /// A list of Pages
+        /// </summary>
         public PaginatedCollection<Beyit> PagesCollection;
 
         #endregion

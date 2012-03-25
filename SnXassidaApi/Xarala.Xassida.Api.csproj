@@ -64,12 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api.cs" />
-    <Compile Include="Api\Bahru.cs" />
-    <Compile Include="Api\Beyit.cs" />
-    <Compile Include="Api\Doc.cs" />
-    <Compile Include="Api\PaginatedCollection.cs" />
+    <Compile Include="Api\Xassida\Bahru.cs" />
+    <Compile Include="Api\Xassida\Beyit.cs" />
+    <Compile Include="PaginatedCollection.cs" />
     <Compile Include="Api\Xassaides.cs" />
     <Compile Include="Api\Xassida.cs" />
+    <Compile Include="Api\Xassida\Traduction.cs" />
+    <Compile Include="Doc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
