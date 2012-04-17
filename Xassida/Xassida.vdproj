@@ -206,7 +206,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:WPFMitsuControls, Version=1.0.4467.20555, Culture=neutral, PublicKeyToken=92523d008e3810c2, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:WPFMitsuControls, Version=1.0.4473.42068, Culture=neutral, PublicKeyToken=92523d008e3810c2, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1259E2C7DECA51C975B2FFDA624992B0"
@@ -433,7 +433,7 @@
             {
             "Name" = "8:#1919"
             "AlwaysCreate" = "11:TRUE"
-            "Condition" = "8:"
+            "Condition" = "8:true"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
                 "Folders"
@@ -457,7 +457,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:XassidaReader"
         "ProductCode" = "8:{CC78F098-ED2C-4116-B457-B9463A4E8CDD}"
-        "PackageCode" = "8:{A17CA81F-E46D-47F5-A205-E21C78B38CF8}"
+        "PackageCode" = "8:{2EFC358D-DD7B-4D31-A42C-0DAADB3581A9}"
         "UpgradeCode" = "8:{EA452C4F-9A84-4821-8EC9-EC3CD0EEA22F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -466,7 +466,7 @@
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:Xarala"
-        "ARPHELPTELEPHONE" = "8:"
+        "ARPHELPTELEPHONE" = "8:221 77 728 26 05"
         "ARPHELPLINK" = "8:"
         "Title" = "8:XassidaReader"
         "Subject" = "8:Book Library of Cheikh Ahmadou Bamba Khadimou Rassoul"
@@ -500,13 +500,27 @@
                         {
                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_408FBBA25A664C66A5D821AD4AA86BA5"
                             {
-                            "Name" = "8:[Manufacturer]"
+                            "Name" = "8:Xarala"
                             "Condition" = "8:"
                             "AlwaysCreate" = "11:FALSE"
                             "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_7CB28F042CDE41BC815111ED64409C3C"
+                                    {
+                                    "Name" = "8:XassidaReader"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -534,13 +548,27 @@
                         {
                             "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_09A016FD6D854E9F98B3FCB79A2675EF"
                             {
-                            "Name" = "8:[Manufacturer]"
+                            "Name" = "8:Xarala"
                             "Condition" = "8:"
                             "AlwaysCreate" = "11:FALSE"
                             "DeleteAtUninstall" = "11:FALSE"
                             "Transitive" = "11:FALSE"
                                 "Keys"
                                 {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_84D93D3D321241FBB3ECFC38C08EBB1F"
+                                    {
+                                    "Name" = "8:XassidaReader"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
                                 }
                                 "Values"
                                 {
@@ -581,7 +609,7 @@
             {
             "Name" = "8:XassidaReader"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:The bibliography of Cheikh Ahmadou Bamba"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
@@ -595,14 +623,14 @@
             {
             "Name" = "8:XassidaReader"
             "Arguments" = "8:"
-            "Description" = "8:"
+            "Description" = "8:The bibliography of Cheikh Ahmadou Bamba"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_FBB3100546D24913BD030119EA999FD3"
             "Folder" = "8:_FBB3100546D24913BD030119EA999FD3"
             "WorkingFolder" = "8:_FBB3100546D24913BD030119EA999FD3"
-            "Icon" = "8:"
+            "Icon" = "8:_6C3F6C8BB0AC45118F3D384A33E6CEDE"
             "Feature" = "8:"
             }
         }
