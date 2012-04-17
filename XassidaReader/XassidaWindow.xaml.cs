@@ -178,6 +178,9 @@ namespace XassidaReader
                     
                     container.Children.Add(c);
                 }
+
+                container.Children.Add(new TextBlock() { Text = String.Format("page {0}", (i + 1).ToString()), Foreground = SystemColors.GrayTextBrush, FontSize = 7, Margin = new Thickness(0, 10, 0, 10) });
+
                 bp.Content = container;
                 readerBook.Items.Add(bp);
 
