@@ -254,10 +254,10 @@
     <Resource Include="Assets\Xassida.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Licenses\WpfBookControl.txt" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Resource Include="Licenses\License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

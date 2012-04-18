@@ -47,7 +47,7 @@ namespace XassidaReader
             //splashScreen.Show(false);
             //splashScreen.Close(TimeSpan.FromSeconds(4));
             //System.Threading.Thread.Sleep(3000);
-            XassidaWindow mainWindow = new XassidaWindow();
+            XassaidesWindow mainWindow = new XassaidesWindow();
             mainWindow.Show();
 
         }

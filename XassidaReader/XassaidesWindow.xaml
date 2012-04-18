@@ -17,7 +17,7 @@
         
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="50" >
 
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -26,26 +26,31 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-
+        
         <ListBox ItemsSource="{Binding}" ItemTemplate="{StaticResource PartialXassidaTemplate}" HorizontalContentAlignment="Stretch" 
                  IsSynchronizedWithCurrentItem="True"  Grid.Row="0" Grid.Column="0" SelectionChanged="ListBox_SelectionChanged"
-                 x:Name="XassaidesListBox" Padding="5" />
-        
-        <StackPanel Grid.Row="0" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Vertical" Margin="5">
+                 x:Name="XassaidesListBox" Padding="5, 5, 5, 10" BorderThickness="0, 0, 1, 0" />
+
+        <StackPanel Grid.Row="0" Grid.Column="1" FlowDirection="RightToLeft" Orientation="Vertical" Margin="5" >
             
             <TextBlock x:Name="SelectedXassidaTitle" Margin="0, 0, 10, 10"/>
             
             <TextBlock x:Name="SelectedXassidaTardioumane" />
             
             <Separator />
-            
+             
             <WrapPanel Orientation="Horizontal">
                 <Button Content="télécharger" Visibility="Visible" Click="Dowload_Xassida_Button_Click" x:Name="DonwloadXassidaButton" Padding="5" Margin="5" />
                 <Button Content="lecture" Visibility="Visible" x:Name="ReadXassidaButton" Padding="5" Margin="5" Click="ReadXassidaButton_Click" />
             </WrapPanel>
             
         </StackPanel>
+
+        <ListBox Grid.Row="0" Grid.Column="2">
+            <Button x:Name="browseOnlineLibrary" Click="browseOnlineLibrary_Click" Content="librairie en ligne" />
+        </ListBox>
 
     </Grid>
 

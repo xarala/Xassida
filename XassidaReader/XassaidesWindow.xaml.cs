@@ -130,5 +130,10 @@ namespace XassidaReader
 
         }
 
+        private void browseOnlineLibrary_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
